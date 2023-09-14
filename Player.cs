@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     public float speed;
     public float maxHeight;
     public float minHeight;
+    
+    public int health = 5;
 
 
     private void Update()
