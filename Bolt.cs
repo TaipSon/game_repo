@@ -16,10 +16,8 @@ public class Bolt : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-    	Instantiate(effect, transform.position, Quaternion.identity);
-    	
         if (other.CompareTag("Player"))
-        {
+        {   Instantiate(effect, transform.position, Quaternion.identity);
             other.GetComponent<Player>().health -= damage;
             Destroy(gameObject);
         }
