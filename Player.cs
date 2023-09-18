@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -15,10 +17,13 @@ public class Player : MonoBehaviour
     public int health = 5;
     
     public GameObject effect;
+    [SerializeField] private TMP_Text healthDisplay;
 
 
     private void Update()
     {
+    	healthDisplay.text = health.ToString();
+    	
         if(health <= 0)
         {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
