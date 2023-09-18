@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tube : MonoBehaviour
+public class Bolt : MonoBehaviour
 {
     public int damage = 1;
     public float speed;
+    
+    public GameObject effect;
 
 
     private void Update()
@@ -14,6 +16,8 @@ public class Tube : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+    	Instantiate(effect, transform.position, Quaternion.identity);
+    	
         if (other.CompareTag("Player"))
         {
             other.GetComponent<Player>().health -= damage;
