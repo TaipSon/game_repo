@@ -13,29 +13,42 @@ public class Player : MonoBehaviour
     public float speed;
     public float maxHeight;
     public float minHeight;
-    
+
     public int health = 5;
-    
+
     public GameObject effect;
     [SerializeField] private TMP_Text healthDisplay;
+    public GameObject panel;
+    public GameObject sound;
 
-
+    private void Start()
+    {
+        Instantiate(sound, transform.position, Quaternion.identity);
+    }
     private void Update()
     {
-    	healthDisplay.text = health.ToString();
-    	
-        if(health <= 0)
+        healthDisplay.text = health.ToString();
+
+        if (health <= 0)
         {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            panel.SetActive(true);
+            Destroy(gameObject);
         }
         transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
 
-        if (Input.GetKeyDown(KeyCode.W) && transform.position.y < maxHeight)
+
+    }
+    public void OnUpButtonDown()
+    {
+        if (transform.position.y < maxHeight)
         {
             Instantiate(effect, transform.position, Quaternion.identity);
             targetPos = new Vector2(transform.position.x, transform.position.y + Yincrement);
         }
-        else if (Input.GetKeyDown(KeyCode.S) && transform.position.y > minHeight)
+    }
+    public void OnDownButtonDown() 
+    {
+        if (transform.position.y > minHeight)
         {
             Instantiate(effect, transform.position, Quaternion.identity);
             targetPos = new Vector2(transform.position.x, transform.position.y - Yincrement);
